@@ -117,17 +117,24 @@ def main():
 
             # Supaya scatter plot tidak terlalu dense
             iterations = iterations[::len(iterations)//50]
+            iterations_copy = iterations
             score = score[::len(score)//50]
             probability = probability[::len(probability)//50]
             colors = score
 
             # Membuat scatter plot
             plt.scatter(iterations, score, c=colors, cmap='viridis')
-            plt.scatter(iterations, probability, color='red')
             plt.title('Scatter Plot')
             plt.xlabel('Iterations')
             plt.ylabel('Score')
             
+            plt.show()
+
+            plt.scatter(iterations_copy, probability, color='red')
+            plt.title('Scatter Plot')
+            plt.xlabel('Iterations')
+            plt.ylabel('e')
+
             plt.show()
 
         elif (choice == 3):
