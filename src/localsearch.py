@@ -148,7 +148,7 @@ def crossover(parent1, parent2):
 
 def weighted_random_selection(population, scores):
     # Calculate inverse scores for weighting
-    inverse_scores = [1 / (score + 1e-6) for score in scores]  # Adding a small value to avoid division by zero
+    inverse_scores = [(1 / score) for score in scores]  
     total_inverse_score = sum(inverse_scores)
     probabilities = [inv_score / total_inverse_score for inv_score in inverse_scores]
     
@@ -156,8 +156,11 @@ def weighted_random_selection(population, scores):
 
 def genetic_algorithm(n, population_size=100, generations=1000, mutation_rate=0.1):
     # Initialize population
+    
     population = [generate_random_cube(n) for _ in range(population_size)]
     scores = [calculate_magic_score(cube) for cube in population]
+    score_per_iteration = dict()
+    start_time = time.time()
     
     for generation in range(generations):
         # Select parents based on their weighted scores
@@ -169,7 +172,7 @@ def genetic_algorithm(n, population_size=100, generations=1000, mutation_rate=0.
         # Crossover and mutation
         while len(new_population) < population_size:
             parent1, parent2 = weighted_random_selection(population, scores)
-            child = crossover(parent1, parent2) q
+            child = crossover(parent1, parent2) 
 
             # Mutate the child
             if random.random() < mutation_rate:
@@ -182,10 +185,11 @@ def genetic_algorithm(n, population_size=100, generations=1000, mutation_rate=0.
 
         # Print the best score of the generation
         best_score = min(scores)
-        print(f"Generation {generation + 1}: Best Score = {best_score}")
+        score_per_iteration[generation] = best_score
+
+    elapsed_time = time.time() - start_time
 
     # Return the best solution found
     best_index = scores.index(min(scores))
-    return population[best_index]
-
-
+    
+    return population[best_index], min(scores), score_per_iteration, elapsed_time

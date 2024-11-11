@@ -1,4 +1,4 @@
-from localsearch import (generate_random_cube, stochastic_hill_climbing, simulated_annealing, calculate_magic_score)
+from localsearch import (generate_random_cube, stochastic_hill_climbing, simulated_annealing, genetic_algorithm, calculate_magic_score)
 import matplotlib.pyplot as plt
 
 def print_cube(cube):
@@ -50,7 +50,7 @@ def main():
             print()
             print("Menggunakan Genetic Algorithm...")
             print()
-            final_cube, final_score, data, time = simulated_annealing(cube)
+            final_cube, final_score, data, time = genetic_algorithm(5)
         elif choice == 4:
             print()
             print("Membuat kubus acak 5x5x5...")
