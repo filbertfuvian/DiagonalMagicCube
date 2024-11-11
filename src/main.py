@@ -33,6 +33,9 @@ def main():
     print(f"Skor Kubus Awal: {calculate_magic_score(cube)}")
     print()
 
+    #Genetic algorithm
+    population_size = 100
+
     while True:
         choice = user_input()
         
@@ -52,7 +55,7 @@ def main():
             print()
             print("Menggunakan Genetic Algorithm...")
             print()
-            final_cube, final_score, best_score, avg_score, time = genetic_algorithm(5)
+            final_cube, final_score, best_score, avg_score, time = genetic_algorithm(5, population_size, 1000)
 
         elif choice == 4:
             print()
@@ -148,6 +151,7 @@ def main():
             avg_score = list(avg_score.values())
 
             print(f'Numbers of generation : {length_generations} generations')
+            print(f'Population size : {population_size}')
             print(f'Time Elapsed : {time} s')
 
             # Supaya scatter plot tidak terlalu dense

@@ -155,7 +155,7 @@ def simulated_annealing(cube, initial_temperature=100, min_temperature=1):
       
     return current_cube, current_score, score_per_iteration, probability_per_iteration, elapsed_time
 
-def genetic_algorithm(n, population_size=100, generations=1000, mutation_rate=0.1):
+def genetic_algorithm(n, population_size, generations, mutation_rate=0.1):
     # Initialize population
     population = [generate_random_cube(n) for _ in range(population_size)]
     scores = [calculate_magic_score(cube) for cube in population]
