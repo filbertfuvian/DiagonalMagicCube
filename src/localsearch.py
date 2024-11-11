@@ -125,6 +125,7 @@ def simulated_annealing(cube, initial_temperature=100, min_temperature=1):
     current_cube = cube.copy()
     current_score = calculate_magic_score(current_cube)
     score_per_iteration = dict()
+    probability_per_iteration = dict()
 
     start_time = time.time()
     
@@ -140,15 +141,19 @@ def simulated_annealing(cube, initial_temperature=100, min_temperature=1):
         neighbor_score = calculate_magic_score(neighbor)
         
         delta_score = neighbor_score - current_score
+
+        probability = math.exp(-delta_score / temperature)
         
-        if delta_score < 0 or math.exp(-delta_score / temperature) > random.random():
+        if delta_score < 0 or probability > random.random():
             current_cube = neighbor
             current_score = neighbor_score
         
         score_per_iteration[i] = current_score
+        probability_per_iteration[i] = probability
+
         i += 1
       
-    return current_cube, current_score, score_per_iteration, elapsed_time
+    return current_cube, current_score, score_per_iteration, probability_per_iteration, elapsed_time
 
 def genetic_algorithm(n, population_size=100, generations=1000, mutation_rate=0.1):
     # Initialize population

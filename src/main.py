@@ -14,7 +14,7 @@ def user_input():
     print("Pilih metode pencarian lokal:")
     print("1. Stochastic Hill Climbing")
     print("2. Simulated Annealing")
-    print("3. Genetic algorithm")
+    print("3. Genetic algorithm (Merandomize kubus lagi)")
     print("4. Randomize Cube")
     print("0. End")
     
@@ -41,16 +41,19 @@ def main():
             print("Menggunakan Stochastic Hill Climbing...")
             print()
             final_cube, final_score, data, time = stochastic_hill_climbing(cube)
+
         elif choice == 2:
             print()
             print("Menggunakan Simulated Annealing...")
             print()
-            final_cube, final_score, data, time = simulated_annealing(cube)
+            final_cube, final_score, data, probability_data, time = simulated_annealing(cube)
+
         elif choice == 3:
             print()
             print("Menggunakan Genetic Algorithm...")
             print()
             final_cube, final_score, best_score, avg_score, time = genetic_algorithm(5)
+
         elif choice == 4:
             print()
             print("Membuat kubus acak 5x5x5...")
@@ -60,11 +63,13 @@ def main():
             print(f"Skor Kubus Awal: {calculate_magic_score(cube)}")
             print()
             continue
+
         elif choice == 0:
             print()
             print("Menghentikan program")
             print()
             return
+        
         else:
             print()
             print("Input tidak valid")
@@ -72,7 +77,7 @@ def main():
             continue
 
 
-        if (choice == 1 or choice == 2):
+        if (choice == 1):
             print("\nKubus yang ditemukan:")
             print_cube(final_cube)
             print(f"Skor magic cube akhir: {final_score}")
@@ -91,6 +96,34 @@ def main():
 
             # Membuat scatter plot
             plt.scatter(iterations, score, c=colors, cmap='viridis')
+            plt.title('Scatter Plot')
+            plt.xlabel('Iterations')
+            plt.ylabel('Score')
+            
+            plt.show()
+
+        elif(choice ==2):
+            print("\nKubus yang ditemukan:")
+            print_cube(final_cube)
+            print(f"Skor magic cube akhir: {final_score}")
+
+            iterations = list(data.keys())
+            length_iterations = len(iterations)
+            score = list(data.values())
+            probability = list(probability_data.values())
+
+            print(f'Numbers of iterations : {length_iterations} iterations')
+            print(f'Time Elapsed : {time} s')
+
+            # Supaya scatter plot tidak terlalu dense
+            iterations = iterations[::len(iterations)//50]
+            score = score[::len(score)//50]
+            probability = probability[::len(probability)//50]
+            colors = score
+
+            # Membuat scatter plot
+            plt.scatter(iterations, score, c=colors, cmap='viridis')
+            plt.scatter(iterations, probability, color='red')
             plt.title('Scatter Plot')
             plt.xlabel('Iterations')
             plt.ylabel('Score')
