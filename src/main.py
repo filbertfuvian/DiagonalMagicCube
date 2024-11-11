@@ -50,7 +50,7 @@ def main():
             print()
             print("Menggunakan Genetic Algorithm...")
             print()
-            final_cube, final_score, data, time = genetic_algorithm(5)
+            final_cube, final_score, best_score, avg_score, time = genetic_algorithm(5)
         elif choice == 4:
             print()
             print("Membuat kubus acak 5x5x5...")
@@ -71,29 +71,57 @@ def main():
             print()
             continue
 
-        print("\nKubus yang ditemukan:")
-        print_cube(final_cube)
-        print(f"Skor magic cube akhir: {final_score}")
 
-        iterations = list(data.keys())
-        length_iterations = len(iterations)
-        score = list(data.values())
+        if (choice == 1 or choice == 2):
+            print("\nKubus yang ditemukan:")
+            print_cube(final_cube)
+            print(f"Skor magic cube akhir: {final_score}")
 
-        print(f'Numbers of iterations : {length_iterations} iterations')
-        print(f'Time Elapsed : {time} s')
+            iterations = list(data.keys())
+            length_iterations = len(iterations)
+            score = list(data.values())
 
-        # Supaya scatter plot tidak terlalu dense
-        iterations = iterations[::len(iterations)//50]
-        score = score[::len(score)//50]
-        colors = score
+            print(f'Numbers of iterations : {length_iterations} iterations')
+            print(f'Time Elapsed : {time} s')
 
-        # Membuat scatter plot
-        plt.scatter(iterations, score, c=colors, cmap='viridis')
-        plt.title('Scatter Plot')
-        plt.xlabel('Iterations')
-        plt.ylabel('Score')
-        
-        plt.show()
+            # Supaya scatter plot tidak terlalu dense
+            iterations = iterations[::len(iterations)//50]
+            score = score[::len(score)//50]
+            colors = score
+
+            # Membuat scatter plot
+            plt.scatter(iterations, score, c=colors, cmap='viridis')
+            plt.title('Scatter Plot')
+            plt.xlabel('Iterations')
+            plt.ylabel('Score')
+            
+            plt.show()
+
+        elif (choice == 3):
+            print("\nKubus terbaik yang ditemukan:")
+            print_cube(final_cube)
+            print(f"Skor magic cube terbaik: {final_score}")
+            
+            generations = list(best_score.keys())
+            length_generations = len(generations)
+            best_score = list(best_score.values())
+            avg_score = list(avg_score.values())
+
+            print(f'Numbers of generation : {length_generations} generations')
+            print(f'Time Elapsed : {time} s')
+
+            # Supaya scatter plot tidak terlalu dense
+            generations = generations[::len(generations)//50]
+            best_score = best_score[::len(best_score)//50]
+            avg_score = avg_score[::len(avg_score)//50]
+
+            # Membuat scatter plot
+            plt.scatter(generations, best_score, color = 'red', label = 'Best Score')
+            plt.scatter(generations, avg_score, color = 'blue', label = 'Average Score')
+            plt.title('Scatter Plot')
+            plt.xlabel('Generations')
+            
+            plt.show()
 
 if __name__ == "__main__":
     main()

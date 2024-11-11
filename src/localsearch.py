@@ -2,7 +2,6 @@ import random
 import math
 import numpy as np
 import time
-import matplotlib.pyplot as plt
 
 def generate_random_cube(n):
     numbers = list(range(1, n**3 + 1))
@@ -79,6 +78,27 @@ def generate_random_neighbor(cube):
     
     return neighbor
 
+def crossover(parent1, parent2, crossoverpoint):
+    n = parent1.shape[0]
+    child = np.zeros_like(parent1)
+    
+    for i in range(n):
+        for j in range(n):
+            if i < crossoverpoint:
+                child[i, j, :] = parent1[i, j, :]
+            else:
+                child[i, j, :] = parent2[i, j, :]
+
+    return child
+
+def selection(population, scores):
+    # Score di inverse agar socre makin kecil makin tinggi probabilitasnya
+    inverse_scores = [(1 / score) for score in scores]  
+    total_inverse_score = sum(inverse_scores)
+    probabilities = [inv_score / total_inverse_score for inv_score in inverse_scores]
+    
+    return random.choices(population, weights=probabilities, k=len(population))
+
 def stochastic_hill_climbing(cube, nmax=60000):
     current_cube = cube.copy()
     current_score = calculate_magic_score(current_cube)
@@ -100,8 +120,6 @@ def stochastic_hill_climbing(cube, nmax=60000):
     elapsed_time = time.time() - start_time
 
     return current_cube, current_score, score_per_iteration, elapsed_time
-
-
 
 def simulated_annealing(cube, initial_temperature=100, min_temperature=1):
     current_cube = cube.copy()
@@ -132,32 +150,12 @@ def simulated_annealing(cube, initial_temperature=100, min_temperature=1):
       
     return current_cube, current_score, score_per_iteration, elapsed_time
 
-def crossover(parent1, parent2, crossoverpoint):
-    n = parent1.shape[0]
-    child = np.zeros_like(parent1)
-    
-    for i in range(n):
-        for j in range(n):
-            if i < crossoverpoint:
-                child[i, j, :] = parent1[i, j, :]
-            else:
-                child[i, j, :] = parent2[i, j, :]
-
-    return child
-
-def selection(population, scores):
-    # Score di inverse agar socre makin kecil makin tinggi probabilitasnya
-    inverse_scores = [(1 / score) for score in scores]  
-    total_inverse_score = sum(inverse_scores)
-    probabilities = [inv_score / total_inverse_score for inv_score in inverse_scores]
-    
-    return random.choices(population, weights=probabilities, k=len(population))
-
 def genetic_algorithm(n, population_size=100, generations=1000, mutation_rate=0.1):
     # Initialize population
     population = [generate_random_cube(n) for _ in range(population_size)]
     scores = [calculate_magic_score(cube) for cube in population]
     bestscore_per_iteration = dict()
+    avgscore_per_iteration = dict()
     bestcube_per_iteration = dict()
     start_time = time.time()
     
@@ -186,7 +184,9 @@ def genetic_algorithm(n, population_size=100, generations=1000, mutation_rate=0.
         scores = [calculate_magic_score(cube) for cube in population]
         
         best_score = min(scores)
+        avg_score = sum(scores) / len(scores)
         bestscore_per_iteration[generation] = best_score
+        avgscore_per_iteration[generation] = avg_score
 
         best_index = scores.index(min(scores))
         bestcube_per_iteration[generation] = population[best_index]
@@ -197,4 +197,4 @@ def genetic_algorithm(n, population_size=100, generations=1000, mutation_rate=0.
     best_cube = bestcube_per_iteration[best_generation]
     best_score = bestscore_per_iteration[best_generation]
     
-    return best_cube, best_score, bestscore_per_iteration, elapsed_time
+    return best_cube, best_score, bestscore_per_iteration, avgscore_per_iteration, elapsed_time
