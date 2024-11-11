@@ -47,6 +47,12 @@ Pastikan Anda memiliki perangkat lunak berikut terinstal:
     ```
 
 # Pembagian Tugas
-
+1. Rashid May
+2. Lutfi Khairul Amal
+3. Filbert Fuvian
+4. Qady Zakka Raymaula
 
 # Referensi
+- https://www.magischvierkant.com/three-dimensional-eng/magic-features/
+- https://www.trump.de/magic-squares/magic-cubes/cubes-1.html
+- https://en.wikipedia.org/wiki/Magic_cube
