@@ -48,22 +48,22 @@ Pastikan Anda memiliki perangkat lunak berikut terinstal:
 
 # Pembagian Tugas
 1. Rashid May
-   1 Melakukan testing eksperimen stochastic hill-climbing
-   2 Melakukan testing eksperimen simulated annealing
-   3 Merapikan sheets data
-   4 Melengkapi dan merapikan laporan
+   1. Melakukan testing eksperimen stochastic hill-climbing
+   2. Melakukan testing eksperimen simulated annealing
+   3. Merapikan sheets data
+   4. Melengkapi dan merapikan laporan
 2. Lutfi Khairul Amal
-   1 Mengisi laporan deskripsi persoalan
-   2 Mengisi laporan pembahasan pemilihan objective function
-   3 Mengisi laporan pembahasan penjelasan implementasi algoritma
+   1. Mengisi laporan deskripsi persoalan
+   2. Mengisi laporan pembahasan pemilihan objective function
+   3. Mengisi laporan pembahasan penjelasan implementasi algoritma
 3. Filbert Fuvian
-   1 Membuat program
-   2 Melakukan testing experiment genetic algorithm
-   3 Melengkapi dan merapikan laporan
+   1. Membuat program
+   2. Melakukan testing experiment genetic algorithm
+   3. Melengkapi dan merapikan laporan
 4. Qady Zakka Raymaula
-   1 Melengkapi dan merapihkan laporan
-   2 Memasukkan data eksperimen kedalam sheets
-   3 Merapikan sheets data
+   1. Melengkapi dan merapihkan laporan
+   2. Memasukkan data eksperimen kedalam sheets
+   3. Merapikan sheets data
 
 # Referensi
 - https://www.magischvierkant.com/three-dimensional-eng/magic-features/
